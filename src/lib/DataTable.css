@@ -1,0 +1,594 @@
+.dt-root {
+  --dt-border: #e3e8ef;
+  --dt-muted: #64748b;
+  --dt-primary: #2563eb;
+  --dt-bg: #fff;
+  color: #172033;
+  background: var(--dt-bg);
+  border: 1px solid var(--dt-border);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgb(15 23 42 / 7%);
+  overflow: hidden;
+  font:
+    14px/1.45 Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+}
+.dt-header-scroll {
+  position: relative;
+  z-index: 4;
+  overflow: visible;
+}
+.dt-header-scroll > table {
+  will-change: transform;
+}
+.dt-body-scroll {
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.dt-root table {
+  min-width: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+.dt-root th,
+.dt-root td {
+  box-sizing: border-box;
+  border-right: 1px solid var(--dt-border);
+  border-bottom: 1px solid var(--dt-border);
+  padding: 8px 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dt-root th:last-child,
+.dt-root td:last-child {
+  border-right: 0;
+}
+.dt-root tbody tr {
+  height: var(--dt-row-height, 48px);
+  max-height: var(--dt-row-height, 48px);
+}
+.dt-root tbody td {
+  height: var(--dt-row-height, 48px);
+  max-height: var(--dt-row-height, 48px);
+  padding: 0 16px;
+}
+.dt-cell-content {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--dt-row-height, 48px);
+  max-height: var(--dt-row-height, 48px);
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dt-cell-content--left {
+  justify-content: flex-start;
+}
+.dt-cell-content--center {
+  justify-content: center;
+}
+.dt-cell-content--right {
+  justify-content: flex-end;
+}
+.dt-cell-content > * {
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: calc(var(--dt-row-height, 48px) - 10px);
+  flex-shrink: 1;
+}
+.dt-cell-content img {
+  width: auto;
+  object-fit: contain;
+}
+.dt-cell-content input,
+.dt-cell-content select,
+.dt-cell-content textarea {
+  min-height: 0;
+}
+.dt-tooltip-container {
+  display: block !important;
+  width: 100%;
+  min-width: 0;
+  height: var(--dt-row-height, 48px);
+  overflow: hidden;
+  cursor: help;
+}
+.dt-action-tooltip-container {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.dt-root thead th {
+  position: relative;
+  overflow: visible;
+  color: #42526a;
+  background: #f8fafc;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.dt-sticky thead th {
+  z-index: 3;
+  box-shadow: 0 1px 0 var(--dt-border);
+}
+.dt-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  min-width: 0;
+}
+.dt-header-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dt-heading {
+  width: auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+.dt-heading > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dt-heading:disabled {
+  cursor: default;
+}
+.dt-heading:focus-visible,
+.dt-action:focus-visible,
+.dt-pagination button:focus-visible,
+.dt-resizer:focus-visible,
+.dt-root input:focus-visible,
+.dt-root select:focus-visible {
+  outline: 2px solid var(--dt-primary);
+  outline-offset: 2px;
+}
+.dt-sort {
+  width: 0;
+  height: 0;
+  flex: none;
+  opacity: 0.4;
+  border-right: 4px solid transparent;
+  border-bottom: 5px solid currentColor;
+  border-left: 4px solid transparent;
+}
+.dt-sort--desc {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+.dt-sort--asc {
+  opacity: 1;
+}
+.dt-sort--none {
+  border-top: 4px solid currentColor;
+  border-bottom: 4px solid currentColor;
+}
+.dt-sort-button {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  margin-left: auto;
+  flex: none;
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  color: #64748b;
+  background: transparent;
+  cursor: pointer;
+}
+.dt-sort-button:hover {
+  color: var(--dt-primary);
+  background: #edf4ff;
+}
+.dt-resizer {
+  position: absolute;
+  z-index: 2;
+  inset-block: 0;
+  right: -4px;
+  width: 9px;
+  cursor: col-resize;
+  touch-action: none;
+}
+.dt-resizer--inset {
+  right: 0;
+}
+.dt-resizer::after {
+  content: "";
+  position: absolute;
+  inset-block: 25%;
+  left: 4px;
+  width: 1px;
+  background: #cbd5e1;
+}
+.dt-resizer:hover::after,
+.dt-resizer:focus::after {
+  width: 2px;
+  background: var(--dt-primary);
+}
+.dt-resizing,
+.dt-resizing * {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+.dt-filters th {
+  padding: 9px 10px;
+  background: #fff;
+}
+.dt-filters input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 64px;
+  padding: 7px 9px;
+  border: 1px solid var(--dt-border);
+  border-radius: 7px;
+  background: #fff;
+  color: inherit;
+  font: 12px inherit;
+}
+.dt-filter-menu {
+  position: relative;
+  z-index: 5;
+  flex: none;
+}
+.dt-filter-trigger {
+  position: relative;
+  display: grid;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #94a3b8;
+  background: transparent;
+  cursor: pointer;
+}
+.dt-filter-trigger:hover,
+.dt-filter-menu--open .dt-filter-trigger {
+  border-color: #cbdaf7;
+  color: var(--dt-primary);
+  background: #edf4ff;
+}
+.dt-filter-trigger i {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--dt-primary);
+}
+.dt-filter-popover {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  width: 230px;
+  padding: 12px;
+  border: 1px solid var(--dt-border);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 12px 35px rgb(15 23 42 / 18%);
+  text-align: left;
+  text-transform: none;
+}
+.dt-filter-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #334155;
+}
+.dt-filter-title span {
+  color: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.dt-filter-title button {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  color: #64748b;
+  background: transparent;
+  cursor: pointer;
+}
+.dt-filter-title button:hover {
+  color: #172033;
+  background: #f1f5f9;
+}
+.dt-filter-popover input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 9px;
+  border: 1px solid var(--dt-border);
+  border-radius: 7px;
+  color: #172033;
+  background: #fff;
+}
+.dt-filter-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #edf0f4;
+}
+.dt-filter-footer button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  padding: 5px 9px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 650;
+}
+.dt-filter-clear {
+  border: 0;
+  color: #64748b;
+  background: transparent;
+}
+.dt-filter-clear:hover:not(:disabled) {
+  color: #dc2626;
+  background: #fff1f2;
+}
+.dt-filter-clear:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.dt-filter-done {
+  border: 1px solid var(--dt-primary);
+  color: #fff;
+  background: var(--dt-primary);
+}
+.dt-filter-done:hover {
+  background: #1d4ed8;
+}
+.dt-root tbody tr {
+  transition: background 0.15s ease;
+}
+.dt-root tbody tr:hover {
+  background: #f8fbff;
+}
+.dt-clickable {
+  cursor: pointer;
+}
+.dt-actions-heading {
+  text-align: center !important;
+}
+.dt-actions .dt-cell-content {
+  gap: 6px;
+}
+.dt-action,
+.dt-pagination button {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 5px 9px;
+  border: 1px solid var(--dt-border);
+  border-radius: 7px;
+  color: #334155;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+.dt-action:hover,
+.dt-pagination button:not(:disabled):hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+.dt-action--danger {
+  color: #dc2626;
+}
+.dt-action:disabled,
+.dt-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.dt-empty {
+  height: 140px !important;
+  max-height: none !important;
+  padding: 16px !important;
+  color: var(--dt-muted);
+  text-align: center;
+}
+.dt-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--dt-border);
+  color: var(--dt-muted);
+  background: #fafcff;
+  font-size: 13px;
+}
+.dt-pagination label,
+.dt-page-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dt-pagination select {
+  padding: 5px 24px 5px 8px;
+  border: 1px solid var(--dt-border);
+  border-radius: 6px;
+  color: inherit;
+  background: #fff;
+}
+@media (max-width: 640px) {
+  .dt-pagination {
+    justify-content: center;
+    gap: 12px;
+  }
+  .dt-page-buttons span {
+    min-width: 90px;
+    text-align: center;
+  }
+}
+
+/* Tema semántico: cuatro colores de entrada producen el resto de los tonos. */
+.dt-root {
+  --dt-surface: #fff;
+  --dt-text: #172033;
+  --dt-primary: #2563eb;
+  --dt-border: #dce3ec;
+  --dt-muted: color-mix(in srgb, var(--dt-text) 62%, var(--dt-surface));
+  --dt-header-bg: color-mix(in srgb, var(--dt-text) 4%, var(--dt-surface));
+  --dt-hover-bg: color-mix(in srgb, var(--dt-primary) 5%, var(--dt-surface));
+  --dt-primary-soft: color-mix(
+    in srgb,
+    var(--dt-primary) 10%,
+    var(--dt-surface)
+  );
+  --dt-primary-border: color-mix(
+    in srgb,
+    var(--dt-primary) 30%,
+    var(--dt-border)
+  );
+  color: var(--dt-text);
+  background: var(--dt-surface);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--dt-text) 8%, transparent);
+}
+.dt-root thead th,
+.dt-pagination {
+  color: var(--dt-muted);
+  background: var(--dt-header-bg);
+}
+.dt-root tbody tr:hover {
+  background: var(--dt-hover-bg);
+}
+.dt-sort-button,
+.dt-filter-trigger {
+  color: var(--dt-muted);
+}
+.dt-sort-button:hover,
+.dt-filter-trigger:hover,
+.dt-filter-menu--open .dt-filter-trigger,
+.dt-action:hover,
+.dt-pagination button:not(:disabled):hover {
+  border-color: var(--dt-primary-border);
+  color: var(--dt-primary);
+  background: var(--dt-primary-soft);
+}
+.dt-filters th,
+.dt-filters input,
+.dt-filter-popover,
+.dt-filter-popover input,
+.dt-action,
+.dt-pagination button,
+.dt-pagination select {
+  color: var(--dt-text);
+  background: var(--dt-surface);
+}
+.dt-filter-popover {
+  box-shadow: 0 12px 35px color-mix(in srgb, var(--dt-text) 20%, transparent);
+}
+.dt-filter-title,
+.dt-filter-title button,
+.dt-filter-clear {
+  color: var(--dt-muted);
+}
+.dt-filter-title button:hover {
+  color: var(--dt-text);
+  background: var(--dt-header-bg);
+}
+.dt-filter-footer {
+  border-top-color: var(--dt-border);
+}
+.dt-filter-done {
+  border-color: var(--dt-primary);
+  color: var(--dt-surface);
+  background: var(--dt-primary);
+}
+.dt-filter-done:hover {
+  filter: brightness(0.9);
+}
+.dt-shape--square {
+  border-radius: 0;
+}
+.dt-shape--square
+  :is(
+    button,
+    input,
+    select,
+    textarea,
+    .dt-filter-popover,
+    .dt-filter-trigger,
+    .dt-action
+  ) {
+  border-radius: 0 !important;
+}
+.dt-shape--soft {
+  border-radius: 14px;
+}
+.dt-select-column,
+.dt-row-number,
+.dt-row-number-heading {
+  text-align: center !important;
+}
+.dt-select-column input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--dt-primary);
+  cursor: pointer;
+}
+.dt-row-number,
+.dt-row-number-heading {
+  color: var(--dt-muted);
+  background: var(--dt-header-bg);
+  font-variant-numeric: tabular-nums;
+}
+.dt-active-cell {
+  position: relative;
+  background: var(--dt-primary-soft) !important;
+  box-shadow: inset 0 0 0 2px var(--dt-primary);
+}
+.dt-table-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  min-height: 36px;
+  padding: 6px 16px;
+  border-top: 1px solid var(--dt-border);
+  color: var(--dt-muted);
+  background: var(--dt-surface);
+  font-size: 12px;
+}
+.dt-table-info strong {
+  color: var(--dt-text);
+  font-weight: 700;
+}
