@@ -3,7 +3,7 @@
   "author": {
     "name": "Juan Zarache"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tabla React moderna, tipada, redimensionable, ordenable, filtrable y paginada.",
   "type": "module",
   "main": "dist/react-table.cjs",
