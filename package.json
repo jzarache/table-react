@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/jzarache/table-react.git"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Tabla React moderna, tipada, redimensionable, ordenable, filtrable y paginada.",
   "type": "module",
   "main": "dist/react-table.cjs",

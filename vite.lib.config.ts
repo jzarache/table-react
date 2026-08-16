@@ -22,6 +22,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         "react",
+        "react/compiler-runtime",
         "react/jsx-runtime",
         "@jzarache/tooltip-react",
       ],
