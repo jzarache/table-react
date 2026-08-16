@@ -1,18 +1,21 @@
 {
-  "name": "modern-react-table",
+  "name": "@jzarache/react-table",
+  "author": {
+    "name": "Juan Zarache"
+  },
   "version": "1.0.0",
   "description": "Tabla React moderna, tipada, redimensionable, ordenable, filtrable y paginada.",
   "type": "module",
-  "main": "dist/modern-react-table.cjs",
-  "module": "dist/modern-react-table.js",
+  "main": "dist/react-table.cjs",
+  "module": "dist/react-table.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/modern-react-table.js",
-      "require": "./dist/modern-react-table.cjs"
+      "import": "./dist/react-table.js",
+      "require": "./dist/react-table.cjs"
     },
-    "./style.css": "./dist/modern-react-table.css"
+    "./style.css": "./dist/react-table.css"
   },
   "files": [
     "dist"
@@ -21,11 +24,11 @@
     "**/*.css"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build && tsc -p tsconfig.lib.json",
+    "dev": "vite --config vite.demo.config.ts",
+    "build": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "build:demo": "tsc -b && vite build --config vite.demo.config.ts",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "prepublishOnly": "pnpm build"
+    "preview": "vite preview --config vite.demo.config.ts"
   },
   "peerDependencies": {
     "react": "^19.2.7",
@@ -53,6 +56,7 @@
     "react-dom": "^19.2.8",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.65.0",
-    "vite": "^8.2.0"
+    "vite": "^8.2.0",
+    "vite-plugin-lib-inject-css": "2.2.2"
   }
 }

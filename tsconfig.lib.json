@@ -10,8 +10,8 @@
     "emitDeclarationOnly": true,
     "declarationMap": true,
     "outDir": "dist",
-    "rootDir": "src/lib",
+    "rootDir": "src",
     "skipLibCheck": true
   },
-  "include": ["src/lib"]
+  "include": ["src"]
 }

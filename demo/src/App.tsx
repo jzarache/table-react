@@ -1,89 +1,81 @@
-import { useMemo, useState } from "react";
-import { Check, Copy, Eye, Pencil, RotateCcw, Trash2 } from "lucide-react";
-import { DataTable, type DataTableColumn, type DataTableTheme } from "./lib";
-import "./App.css";
+import { useMemo, useState } from 'react';
+import { Check, Copy, Eye, Pencil, RotateCcw, Trash2 } from 'lucide-react';
+import { DataTable, type DataTableColumn, type DataTableTheme } from '../../src';
+import './App.css';
 
 type Person = {
   id: number;
   name: string;
   email: string;
   role: string;
-  status: "Activo" | "Pausado" | "Invitado";
+  status: 'Activo' | 'Pausado' | 'Invitado';
   joined: string;
   salary: number;
 };
 
 const initialPeople: Person[] = Array.from({ length: 37 }, (_, index) => ({
   id: index + 1,
-  name: [
-    "Ana Torres",
-    "Luis Díaz",
-    "Marta Silva",
-    "Diego Ruiz",
-    "Sofía Castro",
-    "Carlos Rojas",
-  ][index % 6],
+  name: ['Ana Torres', 'Luis Díaz', 'Marta Silva', 'Diego Ruiz', 'Sofía Castro', 'Carlos Rojas'][index % 6],
   email: `usuario${index + 1}@empresa.com`,
-  role: ["Diseño", "Ingeniería", "Producto", "Marketing"][index % 4],
-  status: index % 6 === 5 ? "Invitado" : index % 4 === 3 ? "Pausado" : "Activo",
-  joined: `2026-${String((index % 8) + 1).padStart(2, "0")}-${String((index % 25) + 1).padStart(2, "0")}`,
+  role: ['Diseño', 'Ingeniería', 'Producto', 'Marketing'][index % 4],
+  status: index % 6 === 5 ? 'Invitado' : index % 4 === 3 ? 'Pausado' : 'Activo',
+  joined: `2026-${String((index % 8) + 1).padStart(2, '0')}-${String((index % 25) + 1).padStart(2, '0')}`,
   salary: 1800 + (index % 9) * 275,
 }));
 
 const themes: Record<string, { label: string; colors: DataTableTheme }> = {
   violet: {
-    label: "Violeta",
+    label: 'Violeta',
     colors: {
-      primary: "#7c3aed",
-      surface: "#ffffff",
-      text: "#1e1b2e",
-      border: "#ddd7eb",
+      primary: '#7c3aed',
+      surface: '#ffffff',
+      text: '#1e1b2e',
+      border: '#ddd7eb',
     },
   },
   ocean: {
-    label: "Océano",
+    label: 'Océano',
     colors: {
-      primary: "#0284c7",
-      surface: "#ffffff",
-      text: "#172554",
-      border: "#cbddeb",
+      primary: '#0284c7',
+      surface: '#ffffff',
+      text: '#172554',
+      border: '#cbddeb',
     },
   },
   forest: {
-    label: "Bosque",
+    label: 'Bosque',
     colors: {
-      primary: "#0f766e",
-      surface: "#ffffff",
-      text: "#16302b",
-      border: "#c8ddd8",
+      primary: '#0f766e',
+      surface: '#ffffff',
+      text: '#16302b',
+      border: '#c8ddd8',
     },
   },
   sunset: {
-    label: "Atardecer",
+    label: 'Atardecer',
     colors: {
-      primary: "#ea580c",
-      surface: "#fffcf7",
-      text: "#431407",
-      border: "#fed7aa",
+      primary: '#ea580c',
+      surface: '#fffcf7',
+      text: '#431407',
+      border: '#fed7aa',
     },
   },
   dark: {
-    label: "Oscuro",
+    label: 'Oscuro',
     colors: {
-      primary: "#a78bfa",
-      surface: "#17151f",
-      text: "#f5f3ff",
-      border: "#393442",
+      primary: '#a78bfa',
+      surface: '#17151f',
+      text: '#f5f3ff',
+      border: '#393442',
     },
   },
 };
 
 const codeExamples = {
   component: {
-    label: "Componente",
-    language: "tsx",
-    code: `import { DataTable } from 'modern-react-table'
-import 'modern-react-table/style.css'
+    label: 'Componente',
+    language: 'tsx',
+    code: `import { DataTable } from '@jzarache/react-table'
 
 export function UsersTable() {
   return (
@@ -102,10 +94,10 @@ export function UsersTable() {
         filtering: true,
         pagination: true,
         resizing: true,
+        columnReordering: true,
       }}
       selectable
       showRowNumbers
-      showTableInfo
       theme={{
         primary: '#7c3aed',
         surface: '#ffffff',
@@ -117,9 +109,9 @@ export function UsersTable() {
 }`,
   },
   columns: {
-    label: "Columnas / JSX",
-    language: "tsx",
-    code: `import type { DataTableColumn } from 'modern-react-table'
+    label: 'Columnas / JSX',
+    language: 'tsx',
+    code: `import type { DataTableColumn } from '@jzarache/react-table'
 
 const columns: DataTableColumn<User>[] = [
   {
@@ -155,8 +147,8 @@ const columns: DataTableColumn<User>[] = [
 ]`,
   },
   data: {
-    label: "Estructura de datos",
-    language: "tsx",
+    label: 'Estructura de datos',
+    language: 'tsx',
     code: `type User = {
   id: number
   name: string
@@ -186,8 +178,8 @@ const users: User[] = [
 // getRowId debe devolver un valor único para cada registro.`,
   },
   selection: {
-    label: "Selección y acciones",
-    language: "tsx",
+    label: 'Selección y acciones',
+    language: 'tsx',
     code: `const [selectedIds, setSelectedIds] = useState<(string | number)[]>([])
 
 <DataTable
@@ -219,23 +211,11 @@ const users: User[] = [
   },
 } as const;
 
-function Toggle({
-  label,
-  checked,
-  onChange,
-}: {
-  label: string;
-  checked: boolean;
-  onChange: (value: boolean) => void;
-}) {
+function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (value: boolean) => void }) {
   return (
     <label className="control-toggle">
       <span>{label}</span>
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(event) => onChange(event.target.checked)}
-      />
+      <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
       <i />
     </label>
   );
@@ -248,47 +228,52 @@ function App() {
   const [filtering, setFiltering] = useState(true);
   const [pagination, setPagination] = useState(true);
   const [resizing, setResizing] = useState(true);
+  const [columnReordering, setColumnReordering] = useState(true);
   const [selectable, setSelectable] = useState(true);
   const [rowNumbers, setRowNumbers] = useState(true);
-  const [tableInfo, setTableInfo] = useState(true);
   const [highlightCell, setHighlightCell] = useState(false);
   const [cellTooltips, setCellTooltips] = useState(true);
-  const [shape, setShape] = useState<"soft" | "square">("soft");
+  const [shape, setShape] = useState<'soft' | 'square'>('soft');
   const [sticky, setSticky] = useState(true);
   const [actionsEnabled, setActionsEnabled] = useState(true);
   const [rowHeight, setRowHeight] = useState(42);
   const [tableHeight, setTableHeight] = useState(420);
   const [pageSize, setPageSize] = useState(10);
-  const [filterMode, setFilterMode] = useState<"menu" | "row">("menu");
-  const [themeName, setThemeName] = useState("violet");
-  const [lastEvent, setLastEvent] = useState(
-    "La demo está lista. Interactúa con la tabla.",
-  );
-  const [activeCode, setActiveCode] =
-    useState<keyof typeof codeExamples>("component");
+  const [filterMode, setFilterMode] = useState<'menu' | 'row'>('menu');
+  const [themeName, setThemeName] = useState('violet');
+  const [lastEvent, setLastEvent] = useState('La demo está lista. Interactúa con la tabla.');
+  const [activeCode, setActiveCode] = useState<keyof typeof codeExamples>('component');
   const [copied, setCopied] = useState(false);
 
   const columns = useMemo<DataTableColumn<Person>[]>(
     () => [
       {
-        id: "name",
-        header: "Nombre",
-        accessor: "name",
+        id: 'name',
+        header: 'Nombre',
+        accessor: 'name',
         width: 180,
         minWidth: 130,
         filterable: true,
       },
       {
-        id: "email",
-        header: "Correo",
-        accessor: "email",
+        id: 'email',
+        header: 'Correo',
+        accessor: 'email',
         width: 235,
         filterable: true,
       },
       {
-        id: "role",
-        header: "Rol editable",
-        accessor: "role",
+        id: 'actions',
+        type: 'actions',
+        header: 'Acciones',
+        width: 140,
+        minWidth: 105,
+        maxWidth: 260,
+      },
+      {
+        id: 'role',
+        header: 'Rol editable',
+        accessor: 'role',
         width: 170,
         filterable: true,
         cell: (_, row) => (
@@ -298,11 +283,7 @@ function App() {
             onClick={(event) => event.stopPropagation()}
             onChange={(event) =>
               setRows((current) =>
-                current.map((item) =>
-                  item.id === row.id
-                    ? { ...item, role: event.target.value }
-                    : item,
-                ),
+                current.map((item) => (item.id === row.id ? { ...item, role: event.target.value } : item))
               )
             }
           >
@@ -314,41 +295,37 @@ function App() {
         ),
       },
       {
-        id: "status",
-        header: "Estado",
-        accessor: "status",
+        id: 'status',
+        header: 'Estado',
+        accessor: 'status',
         width: 130,
         filterable: true,
-        cell: (value) => (
-          <span className={`badge badge--${String(value).toLowerCase()}`}>
-            {String(value)}
-          </span>
-        ),
+        cell: (value) => <span className={`badge badge--${String(value).toLowerCase()}`}>{String(value)}</span>,
       },
       {
-        id: "salary",
-        header: "Salario",
-        accessor: "salary",
+        id: 'salary',
+        header: 'Salario',
+        accessor: 'salary',
         width: 135,
-        align: "right",
+        align: 'right',
         filterable: true,
         filterFn: (value, filter) => Number(value) >= Number(filter || 0),
         cell: (value) =>
-          new Intl.NumberFormat("es-CO", {
-            style: "currency",
-            currency: "USD",
+          new Intl.NumberFormat('es-CO', {
+            style: 'currency',
+            currency: 'USD',
             maximumFractionDigits: 0,
           }).format(Number(value)),
       },
       {
-        id: "joined",
-        header: "Ingreso",
-        accessor: "joined",
+        id: 'joined',
+        header: 'Ingreso',
+        accessor: 'joined',
         width: 135,
         filterable: false,
       },
     ],
-    [],
+    []
   );
 
   const resetDemo = () => {
@@ -358,20 +335,20 @@ function App() {
     setFiltering(true);
     setPagination(true);
     setResizing(true);
+    setColumnReordering(true);
     setSelectable(true);
     setRowNumbers(true);
-    setTableInfo(true);
     setHighlightCell(false);
     setCellTooltips(true);
-    setShape("soft");
+    setShape('soft');
     setSticky(true);
     setActionsEnabled(true);
     setRowHeight(42);
     setTableHeight(420);
     setPageSize(10);
-    setFilterMode("menu");
-    setThemeName("violet");
-    setLastEvent("Configuración restablecida.");
+    setFilterMode('menu');
+    setThemeName('violet');
+    setLastEvent('Configuración restablecida.');
   };
 
   const copyCurrentCode = async () => {
@@ -386,10 +363,7 @@ function App() {
         <div>
           <span className="eyebrow">MODERN REACT TABLE · PLAYGROUND</span>
           <h1>Prueba cada detalle.</h1>
-          <p>
-            Activa funciones, cambia la apariencia e interactúa con datos reales
-            desde un solo lugar.
-          </p>
+          <p>Activa funciones, cambia la apariencia e interactúa con datos reales desde un solo lugar.</p>
         </div>
         <button className="reset-button" type="button" onClick={resetDemo}>
           <RotateCcw size={16} /> Restablecer
@@ -404,73 +378,26 @@ function App() {
           </div>
           <fieldset>
             <legend>Funciones</legend>
-            <Toggle
-              label="Ordenamiento"
-              checked={sorting}
-              onChange={setSorting}
-            />
-            <Toggle
-              label="Filtros"
-              checked={filtering}
-              onChange={setFiltering}
-            />
-            <Toggle
-              label="Paginación"
-              checked={pagination}
-              onChange={setPagination}
-            />
-            <Toggle
-              label="Redimensionar"
-              checked={resizing}
-              onChange={setResizing}
-            />
-            <Toggle
-              label="Cabecera fija"
-              checked={sticky}
-              onChange={setSticky}
-            />
-            <Toggle
-              label="Tooltips truncados"
-              checked={cellTooltips}
-              onChange={setCellTooltips}
-            />
+            <Toggle label="Ordenamiento" checked={sorting} onChange={setSorting} />
+            <Toggle label="Filtros" checked={filtering} onChange={setFiltering} />
+            <Toggle label="Paginación" checked={pagination} onChange={setPagination} />
+            <Toggle label="Redimensionar" checked={resizing} onChange={setResizing} />
+            <Toggle label="Reordenar columnas" checked={columnReordering} onChange={setColumnReordering} />
+            <Toggle label="Cabecera fija" checked={sticky} onChange={setSticky} />
+            <Toggle label="Tooltips truncados" checked={cellTooltips} onChange={setCellTooltips} />
           </fieldset>
           <fieldset>
             <legend>Columnas opcionales</legend>
-            <Toggle
-              label="Selección"
-              checked={selectable}
-              onChange={setSelectable}
-            />
-            <Toggle
-              label="Número de fila"
-              checked={rowNumbers}
-              onChange={setRowNumbers}
-            />
-            <Toggle
-              label="Barra informativa"
-              checked={tableInfo}
-              onChange={setTableInfo}
-            />
-            <Toggle
-              label="Resaltar celda"
-              checked={highlightCell}
-              onChange={setHighlightCell}
-            />
-            <Toggle
-              label="Acciones"
-              checked={actionsEnabled}
-              onChange={setActionsEnabled}
-            />
+            <Toggle label="Selección" checked={selectable} onChange={setSelectable} />
+            <Toggle label="Número de fila" checked={rowNumbers} onChange={setRowNumbers} />
+            <Toggle label="Resaltar celda" checked={highlightCell} onChange={setHighlightCell} />
+            <Toggle label="Acciones" checked={actionsEnabled} onChange={setActionsEnabled} />
           </fieldset>
           <fieldset className="control-fields">
             <legend>Presentación</legend>
             <label>
               Tema
-              <select
-                value={themeName}
-                onChange={(event) => setThemeName(event.target.value)}
-              >
+              <select value={themeName} onChange={(event) => setThemeName(event.target.value)}>
                 {Object.entries(themes).map(([key, theme]) => (
                   <option key={key} value={key}>
                     {theme.label}
@@ -485,34 +412,21 @@ function App() {
             </div>
             <label>
               Estilo de bordes
-              <select
-                value={shape}
-                onChange={(event) =>
-                  setShape(event.target.value as "soft" | "square")
-                }
-              >
+              <select value={shape} onChange={(event) => setShape(event.target.value as 'soft' | 'square')}>
                 <option value="soft">Suave</option>
                 <option value="square">Cuadrado</option>
               </select>
             </label>
             <label>
               Modo de filtro
-              <select
-                value={filterMode}
-                onChange={(event) =>
-                  setFilterMode(event.target.value as "menu" | "row")
-                }
-              >
+              <select value={filterMode} onChange={(event) => setFilterMode(event.target.value as 'menu' | 'row')}>
                 <option value="menu">Menú compacto</option>
                 <option value="row">Fila visible</option>
               </select>
             </label>
             <label>
               Filas por página
-              <select
-                value={pageSize}
-                onChange={(event) => setPageSize(Number(event.target.value))}
-              >
+              <select value={pageSize} onChange={(event) => setPageSize(Number(event.target.value))}>
                 <option>5</option>
                 <option>10</option>
                 <option>20</option>
@@ -568,38 +482,39 @@ function App() {
               setLastEvent(`${ids.length} fila(s) seleccionada(s).`);
             }}
             showRowNumbers={rowNumbers}
-            showTableInfo={tableInfo}
             highlightActiveCell={highlightCell}
             cellTooltips={cellTooltips}
             actionsColumn={{ width: 140, minWidth: 105, maxWidth: 260 }}
-            features={{ sorting, filtering, pagination, resizing }}
-            onRowClick={(row) =>
-              setLastEvent(`Fila pulsada: ${row.name} (#${row.id}).`)
-            }
+            features={{
+              sorting,
+              filtering,
+              pagination,
+              resizing,
+              columnReordering,
+            }}
+            onRowClick={(row) => setLastEvent(`Fila pulsada: ${row.name} (#${row.id}).`)}
             actions={
               actionsEnabled
                 ? [
                     {
-                      id: "view",
-                      label: "Ver",
+                      id: 'view',
+                      label: 'Ver',
                       icon: <Eye size={16} color="#0284c7" />,
                       onClick: (row) => setLastEvent(`Viendo a ${row.name}.`),
                     },
                     {
-                      id: "edit",
-                      label: "Editar",
+                      id: 'edit',
+                      label: 'Editar',
                       icon: <Pencil size={16} color="#d97706" />,
                       onClick: (row) => setLastEvent(`Editando a ${row.name}.`),
                     },
                     {
-                      id: "delete",
-                      label: "Eliminar",
+                      id: 'delete',
+                      label: 'Eliminar',
                       icon: <Trash2 size={16} />,
-                      variant: "danger",
+                      variant: 'danger',
                       onClick: (row) => {
-                        setRows((current) =>
-                          current.filter((item) => item.id !== row.id),
-                        );
+                        setRows((current) => current.filter((item) => item.id !== row.id));
                         setLastEvent(`${row.name} fue eliminado de la demo.`);
                       },
                     },
@@ -610,7 +525,7 @@ function App() {
           <div className="event-console">
             <span>Último evento</span>
             <p>{lastEvent}</p>
-            <code>selectedRowIds: [{selectedIds.join(", ")}]</code>
+            <code>selectedRowIds: [{selectedIds.join(', ')}]</code>
           </div>
         </div>
       </section>
@@ -620,18 +535,11 @@ function App() {
           <div>
             <span className="eyebrow">GUÍA DE USO</span>
             <h2>Del dato al componente.</h2>
-            <p>
-              Copia estos templates y reemplaza el tipo y los campos por los de
-              tu aplicación.
-            </p>
+            <p>Copia estos templates y reemplaza el tipo y los campos por los de tu aplicación.</p>
           </div>
         </div>
         <div className="code-window">
-          <div
-            className="code-tabs"
-            role="tablist"
-            aria-label="Ejemplos de código"
-          >
+          <div className="code-tabs" role="tablist" aria-label="Ejemplos de código">
             <div>
               {Object.entries(codeExamples).map(([key, example]) => (
                 <button
@@ -639,7 +547,7 @@ function App() {
                   type="button"
                   role="tab"
                   aria-selected={activeCode === key}
-                  className={activeCode === key ? "active" : ""}
+                  className={activeCode === key ? 'active' : ''}
                   onClick={() => {
                     setActiveCode(key as keyof typeof codeExamples);
                     setCopied(false);
@@ -649,20 +557,14 @@ function App() {
                 </button>
               ))}
             </div>
-            <button
-              type="button"
-              className="copy-button"
-              onClick={copyCurrentCode}
-            >
+            <button type="button" className="copy-button" onClick={copyCurrentCode}>
               {copied ? <Check size={14} /> : <Copy size={14} />}
-              {copied ? "Copiado" : "Copiar"}
+              {copied ? 'Copiado' : 'Copiar'}
             </button>
           </div>
           <div className="code-meta">
             <span>{codeExamples[activeCode].language}</span>
-            <span>
-              {codeExamples[activeCode].code.split("\n").length} líneas
-            </span>
+            <span>{codeExamples[activeCode].code.split('\n').length} líneas</span>
           </div>
           <pre>
             <code>{codeExamples[activeCode].code}</code>
