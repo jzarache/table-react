@@ -1,4 +1,4 @@
-# @jzarache/react-table
+# @jzarache/table-react
 
 Tabla de datos reutilizable para React y TypeScript. Incluye ordenamiento, filtros, paginación, selección, redimensionamiento, reordenamiento de columnas, acciones por fila y personalización visual.
 
@@ -32,19 +32,19 @@ https://table-react-jz.vercel.app
 Con pnpm:
 
 ```bash
-pnpm add @jzarache/react-table
+pnpm add @jzarache/table-react
 ```
 
 Con npm:
 
 ```bash
-npm install @jzarache/react-table
+npm install @jzarache/table-react
 ```
 
 ## Uso básico
 
 ```tsx
-import { DataTable, type DataTableColumn } from "@jzarache/react-table";
+import { DataTable, type DataTableColumn } from "@jzarache/table-react";
 
 type User = {
   id: number;

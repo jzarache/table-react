@@ -1,5 +1,5 @@
 {
-  "name": "@jzarache/react-table",
+  "name": "@jzarache/table-react",
   "author": {
     "name": "Juan Zarache"
   },
@@ -10,16 +10,16 @@
   "version": "1.0.2",
   "description": "Tabla React moderna, tipada, redimensionable, ordenable, filtrable y paginada.",
   "type": "module",
-  "main": "dist/react-table.cjs",
-  "module": "dist/react-table.js",
+  "main": "dist/table-react.cjs",
+  "module": "dist/table-react.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/react-table.js",
-      "require": "./dist/react-table.cjs"
+      "import": "./dist/table-react.js",
+      "require": "./dist/table-react.cjs"
     },
-    "./style.css": "./dist/react-table.css"
+    "./style.css": "./dist/table-react.css"
   },
   "files": [
     "dist"

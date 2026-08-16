@@ -75,7 +75,7 @@ const codeExamples = {
   component: {
     label: 'Componente',
     language: 'tsx',
-    code: `import { DataTable } from '@jzarache/react-table'
+    code: `import { DataTable } from '@jzarache/table-react'
 
 export function UsersTable() {
   return (
@@ -111,7 +111,7 @@ export function UsersTable() {
   columns: {
     label: 'Columnas / JSX',
     language: 'tsx',
-    code: `import type { DataTableColumn } from '@jzarache/react-table'
+    code: `import type { DataTableColumn } from '@jzarache/table-react'
 
 const columns: DataTableColumn<User>[] = [
   {

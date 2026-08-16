@@ -14,10 +14,10 @@ export default defineConfig({
     copyPublicDir: false,
     lib: {
       entry: resolve(import.meta.dirname, "src/index.ts"),
-      name: "ModernReactTable",
+      name: "TableReact",
       formats: ["es", "cjs"],
-      cssFileName: "react-table",
-      fileName: (format) => `react-table.${format === "es" ? "js" : "cjs"}`,
+      cssFileName: "table-react",
+      fileName: (format) => `table-react.${format === "es" ? "js" : "cjs"}`,
     },
     rollupOptions: {
       external: [
@@ -27,7 +27,7 @@ export default defineConfig({
         "@jzarache/tooltip-react",
       ],
       output: {
-        assetFileNames: "react-table[extname]",
+        assetFileNames: "table-react[extname]",
         globals: {
           react: "React",
           "@jzarache/tooltip-react": "TooltipReact",
