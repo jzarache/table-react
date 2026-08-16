@@ -23,14 +23,12 @@ export default defineConfig({
       external: [
         "react",
         "react/jsx-runtime",
-        "lucide-react",
         "@jzarache/tooltip-react",
       ],
       output: {
         assetFileNames: "react-table[extname]",
         globals: {
           react: "React",
-          "lucide-react": "LucideReact",
           "@jzarache/tooltip-react": "TooltipReact",
         },
       },

@@ -11,9 +11,6 @@ importers:
       '@jzarache/tooltip-react':
         specifier: ^1.0.2
         version: 1.0.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      lucide-react:
-        specifier: ^0.468.0
-        version: 0.468.0(react@19.2.8)
     devDependencies:
       '@babel/core':
         specifier: ^7.29.7
@@ -54,6 +51,9 @@ importers:
       globals:
         specifier: ^17.7.0
         version: 17.11.0
+      lucide-react:
+        specifier: ^0.468.0
+        version: 0.468.0(react@19.2.8)
       react:
         specifier: ^19.2.8
         version: 19.2.8

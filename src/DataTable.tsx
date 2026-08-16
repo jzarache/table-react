@@ -9,9 +9,73 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Filter, GripVertical, X } from 'lucide-react';
 import { Tooltip } from '@jzarache/tooltip-react';
 import './DataTable.css';
+
+type InternalIconProps = {
+  size?: number;
+  strokeWidth?: number;
+};
+
+function FilterIcon({ size = 24, strokeWidth = 2 }: InternalIconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3Z" />
+    </svg>
+  );
+}
+
+function GripVerticalIcon({ size = 24, strokeWidth = 2 }: InternalIconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="9" cy="5" r="1" />
+      <circle cx="9" cy="12" r="1" />
+      <circle cx="9" cy="19" r="1" />
+      <circle cx="15" cy="5" r="1" />
+      <circle cx="15" cy="12" r="1" />
+      <circle cx="15" cy="19" r="1" />
+    </svg>
+  );
+}
+
+function XIcon({ size = 24, strokeWidth = 2 }: InternalIconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m18 6-12 12" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
 
 export type SortDirection = 'asc' | 'desc' | 'none';
 
@@ -440,7 +504,7 @@ export function DataTable<T>({
         }}
         onDragEnd={() => setDraggedColumnId(null)}
       >
-        <GripVertical size={14} aria-hidden="true" />
+        <GripVerticalIcon size={14} />
       </button>
     );
   };
@@ -683,7 +747,7 @@ export function DataTable<T>({
                             aria-expanded={openFilterId === column.id}
                             onClick={() => setOpenFilterId((current) => (current === column.id ? null : column.id))}
                           >
-                            <Filter size={14} strokeWidth={2} aria-hidden="true" />
+                            <FilterIcon size={14} strokeWidth={2} />
                             {filters[column.id] && <i />}
                           </button>
                           {openFilterId === column.id && (
@@ -691,7 +755,7 @@ export function DataTable<T>({
                               <div className="dt-filter-title">
                                 <span>Filtrar por {column.header}</span>
                                 <button type="button" aria-label="Cerrar filtro" onClick={() => setOpenFilterId(null)}>
-                                  <X size={16} aria-hidden="true" />
+                                  <XIcon size={16} />
                                 </button>
                               </div>
                               {filterControl(column)}
@@ -708,7 +772,7 @@ export function DataTable<T>({
                                     setPage(1);
                                   }}
                                 >
-                                  <X size={13} aria-hidden="true" /> Limpiar
+                                  <XIcon size={13} /> Limpiar
                                 </button>
                                 <button type="button" className="dt-filter-done" onClick={() => setOpenFilterId(null)}>
                                   Listo
